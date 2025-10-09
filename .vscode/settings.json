@@ -1,0 +1,9 @@
+{
+    "docwriter.style": "Auto-detect",
+    "docwriter.language": "English",
+    "python.testing.pytestArgs": [
+        "Programm practic"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
