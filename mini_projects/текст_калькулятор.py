@@ -164,7 +164,7 @@ def to_rpn(tokens):
 def eval_rpn(rpn):
     stack = []
     for token in rpn:
-        if isinstance(token, (int, float)):
+        if isinstance(token, (int)):
             stack.append(token)
         elif token in ["+", "-", "*"]:
             b = stack.pop()
