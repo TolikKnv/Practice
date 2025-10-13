@@ -1,6 +1,3 @@
-from math import *
-from itertools import count
-
 does = {"плюс": "+", "минус": "-", "умножить": "*"}
 
 
@@ -80,6 +77,9 @@ def words_to_list():
             l.append(does[i])
         if i in brackets:
             l.append(brackets[i])
+        if i not in numbers and i not in does and i not in brackets:
+            print("Ошибка: неверный ввод - неизвестные слова.")
+            exit()
 
 
     # Делаем список, где хранится каждый элемент примера
@@ -102,6 +102,27 @@ def words_to_list():
         sec.append(chi)
     return sec
 
+
+def var_check(expression: list):
+    check = ''
+    for i in expression:
+        check += str(i)
+    if check.count("(") != check.count(")"):
+        print("Ошибка: несоответствие количества открывающих и закрывающих скобок.")
+        exit()
+    if expression[0] in does.values():
+        print("Ошибка: оператор не может быть первым.")
+        exit()
+    if expression[-1] in does.values():
+        print("Ошибка: оператор не может быть последним.")
+        exit()
+    for i in range(len(expression) - 1):
+        if expression[i] == "(" and expression[i + 1] == ")":
+            print("Ошибка: пустые скобки ()")
+            exit()
+    if '**' in check or '++' in check or '--' in check or '+*' in check or '*+' in check or '-*' in check or '*-' in check or '+-' in check or '-+' in check:
+        print("Ошибка: несколько операторов не может идти подряд.")
+        exit()
 
 def to_rpn(tokens):
     ops_priority = {"+": 1, "-": 1, "*": 2}
@@ -175,4 +196,6 @@ def convert(sum):
     print(start_str + " = " + otv, sep=" ")
 
 
-convert(eval_rpn(to_rpn(words_to_list())))
+kon = words_to_list()
+var_check(kon)
+convert(eval_rpn(to_rpn(kon)))
