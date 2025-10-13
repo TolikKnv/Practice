@@ -1,7 +1,7 @@
-import math
+from math import *
 from itertools import count
 
-does = {" плюс ": "+", " минус ": "-", " умножить ": "*"}
+does = {" плюс ": "+", " минус ": "-", " умножить на ": "*"}
 
 numbers = {
     "ноль": 0,
@@ -15,7 +15,7 @@ numbers = {
     "восемь": 8,
     "девять": 9,
     "десять": 10,
-    "одинадцать": 11,
+    "одиннадцать": 11,
     "двенадцать": 12,
     "тринадцать": 13,
     "четырнадцать": 14,
@@ -42,14 +42,14 @@ numbers = {
     "восемьсот": 800,
     "девятьсот": 900,
     "одна тысяча": 1000,
-    "две тысяча": 2000,
-    "три тысяча": 3000,
-    "четыре тысяча": 4000,
-    "пять тысяча": 5000,
-    "шесть тысяча": 6000,
-    "семь тысяча": 7000,
-    "восемь тысяча": 8000,
-    "девять тысяча": 9000,
+    "две тысячи": 2000,
+    "три тысячи": 3000,
+    "четыре тысячи": 4000,
+    "пять тысяч": 5000,
+    "шесть тысяч": 6000,
+    "семь тысяч": 7000,
+    "восемь тысяч": 8000,
+    "девять тысяч": 9000,
 }
 
 numbers_int = {}
@@ -68,18 +68,33 @@ def calc():
         sum = 0
         for i in range(len(chi)):
             sum += numbers[chi[i]]
-        if sum >= 100 and sum % 100 >= 20 and sum % 10 != 0:
-            otv = f"{numbers_int[sum//100*100]} {numbers_int[sum%100//10*10]} {numbers_int[sum%100%10]}"
-        if sum >= 100 and sum % 100 >= 20 and sum % 10 == 0:
-            otv = f"{numbers_int[sum//100*100]} {numbers_int[sum%100//10*10]}"
-        elif sum >= 100 and 0 < sum % 100 < 20:
-            otv = f"{numbers_int[sum // 100*100]} {numbers_int[sum % 100]}"
-        elif 20 < sum < 100 and sum % 10 > 0:
-            otv = f"{numbers_int[sum//10*10]} {numbers_int[sum%10]}"
-        elif 20 < sum < 100 and sum % 10 == 0:
-            otv = f"{numbers_int[sum]}"
-        elif sum < 20 and sum % 10 != 0:
-            otv = f"{numbers_int[sum]}"
+
+        if sum%100<20 and sum<100:
+            otv = numbers_int[sum]
+        elif sum%100<20 and sum>100:
+            sum = str(sum)
+            l = []
+            l.extend(sum)
+            otv = ''
+            for i in range(len(l)-2):
+                if numbers_int[int(l[i])*10**(len(l)-i-1)] !='ноль':
+                    otv += numbers_int[int(l[i])*10**(len(l)-i-1)]+' '
+            otv = otv[:-1]+numbers_int[int(l[-2]+l[-1])]
+            if sum == '0':
+                otv = 'ноль'
+        else:
+            sum = str(sum)
+            l = []
+            l.extend(sum)
+            otv = ''
+            for i in range(len(l)):
+                if numbers_int[int(l[i])*10**(len(l)-i-1)] !='ноль':
+                    otv += numbers_int[int(l[i])*10**(len(l)-i-1)]+' '
+            otv = otv[:-1]
+            if sum == '0':
+                otv = 'ноль'
+
+
 
     if " минус " in vur:
         vur_num = vur.split(" минус ")
@@ -90,40 +105,57 @@ def calc():
             sum += numbers[chi[i]]
         for i in range(len(chi2)):
             sum -= numbers[chi2[i]]
-        if (20 >= sum >= 0) or (sum > 20 and sum % 10 == 0):
-            otv = f"{numbers_int[sum]}"
-        elif sum > 20 and sum % 10 != 0:
-            otv = f"{numbers_int[sum//10*10]} {numbers_int[sum%10]}"
-        elif (-20 <= sum < 0) or (sum < 0 and sum * (-1) % 10 == 0):
-            otv = f"минус {numbers_int[sum*(-1)]}"
-        elif -100 <= sum < -20 and sum * (-1) % 10 == 0:
-            otv = f"минус {numbers_int[sum * (-1)]}"
-        elif -100 < sum < -20 and sum * (-1) % 10 != 0:
-            otv = f"минус {numbers_int[sum*(-1)//10*10]} {numbers_int[sum*(-1)%10]}"
-        elif sum < -100 and sum * (-1) % 100 >= 20 and sum * (-1) % 10 != 0:
-            otv = f"минус {numbers_int[sum*(-1) // 100 * 100]} {numbers_int[sum*(-1) % 100 // 10 * 10]} {numbers_int[sum*(-1) % 100 % 10]}"
-        elif sum * (-1) >= 100 and sum * (-1) % 100 >= 20 and sum * (-1) % 10 == 0:
-            otv = f"минус {numbers_int[sum*(-1)//100*100]} {numbers_int[sum*(-1)%100//10*10]}"
-        elif sum * (-1) >= 100 and 0 < sum * (-1) % 100 < 20:
-            otv = f"минус {numbers_int[sum*(-1) // 100*100]} {numbers_int[sum*(-1) % 100]}"
 
-    # if " умножить на " in vur:
-    #     vur_num = vur.split(" умножить на ")
-    #     chi1 = vur_num[0].split()
-    #     chi2 = vur_num[1].split()
-    #     wer, wer1 = 0, 0
-    #     for i in range(len(chi1)):
-    #         wer += numbers[chi1[i]]
-    #     for i in range(len(chi2)):
-    #         wer1 += numbers[chi2[i]]
-    #     umn = wer1 * wer
-    #     umn = str(umn)
-    #     # if (umn<=20) or (umn<100 and umn%10==0) or (100<=umn<=900 and umn%100==0) or (1000<=umn<=9000 and umn%100==0)
-    #     l = []
-    #     l.extend(umn)
-    #     print(l)
 
-    print(f'{vur}'+' = '+otv, sep=' ')
+        if sum%100<20 and sum<100:
+            otv = numbers_int[sum]
+        elif sum%100<20 and sum>100:
+            sum = str(sum)
+            l = []
+            l.extend(sum)
+            otv = ''
+            for i in range(len(l)-2):
+                if numbers_int[int(l[i])*10**(len(l)-i-1)] !='ноль':
+                    otv += numbers_int[int(l[i])*10**(len(l)-i-1)]+' '
+            otv = otv[:-1]+numbers_int[int(l[-2]+l[-1])]
+            if sum == '0':
+                otv = 'ноль'
+        else:
+            sum = str(sum)
+            l = []
+            l.extend(sum)
+            otv = ''
+            for i in range(len(l)):
+                if numbers_int[int(l[i])*10**(len(l)-i-1)] !='ноль':
+                    otv += numbers_int[int(l[i])*10**(len(l)-i-1)]+' '
+            otv = otv[:-1]
+            if sum == '0':
+                otv = 'ноль'
+
+    if " умножить на " in vur:
+        vur_num = vur.split(" умножить на ")
+        chi1 = vur_num[0].split()
+        chi2 = vur_num[1].split()
+        wer, wer1 = 0, 0
+        for i in range(len(chi1)):
+            wer += numbers[chi1[i]]
+        for i in range(len(chi2)):
+            wer1 += numbers[chi2[i]]
+        sum = wer1 * wer
+        sum = str(umn)
+
+        l = []
+        l.extend(umn)
+        otv = ''
+        for i in range(len(l)):
+            if numbers_int[int(l[i])*10**(len(l)-i-1)] !='ноль':
+                otv += numbers_int[int(l[i])*10**(len(l)-i-1)]+' '
+        otv = otv[:-1]
+        if umn == '0':
+            otv = 'ноль'
+
+
+    print(f"{vur}" + " = " + otv, sep=" ")
 
 
 calc()
