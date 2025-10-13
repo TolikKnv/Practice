@@ -81,7 +81,6 @@ def words_to_list():
             print("Ошибка: неверный ввод - неизвестные слова.")
             exit()
 
-
     # Делаем список, где хранится каждый элемент примера
     sec = []
     for i in range(len(l)):
@@ -104,7 +103,7 @@ def words_to_list():
 
 
 def var_check(expression: list):
-    check = ''
+    check = ""
     for i in expression:
         check += str(i)
     if check.count("(") != check.count(")"):
@@ -120,9 +119,20 @@ def var_check(expression: list):
         if expression[i] == "(" and expression[i + 1] == ")":
             print("Ошибка: пустые скобки ()")
             exit()
-    if '**' in check or '++' in check or '--' in check or '+*' in check or '*+' in check or '-*' in check or '*-' in check or '+-' in check or '-+' in check:
+    if (
+        "**" in check
+        or "++" in check
+        or "--" in check
+        or "+*" in check
+        or "*+" in check
+        or "-*" in check
+        or "*-" in check
+        or "+-" in check
+        or "-+" in check
+    ):
         print("Ошибка: несколько операторов не может идти подряд.")
         exit()
+
 
 def to_rpn(tokens):
     ops_priority = {"+": 1, "-": 1, "*": 2}
@@ -179,7 +189,7 @@ def convert(sum):
         for i in range(len(l) - 2):
             if numbers_int[int(l[i]) * 10 ** (len(l) - i - 1)] != "ноль":
                 otv += numbers_int[int(l[i]) * 10 ** (len(l) - i - 1)] + " "
-        otv = otv[:-1] + numbers_int[int(l[-2] + l[-1])]
+        otv = otv[:-1] + " " + numbers_int[int(l[-2] + l[-1])]
         if sum == "0":
             otv = "ноль"
     else:
