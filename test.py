@@ -109,3 +109,4 @@
 #         continue
 #     print(n, end='*')
 
+print('1 2 3 4'.split())
