@@ -11,3 +11,4 @@ print(hex(a))  # 0x7b
 # int(str(число), основание_системы) -> int
 
 print(int('A1', 16))  # 161
+
