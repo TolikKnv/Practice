@@ -1,8 +1,10 @@
+# Словарь с математическими операциями (на русском → в символ)
 does = {"плюс": "+", "минус": "-", "умножить": "*"}
 
-
+# Словарь для обозначения скобок
 brackets = {"left": "(", "right": ")"}
 
+# Словарь чисел: слова → числа
 numbers = {
     "ноль": 0,
     "один": 1,
@@ -52,24 +54,32 @@ numbers = {
     "девять тысяч": 9000,
 }
 
+# Обратный словарь: числа → слова (для вывода результата)
 numbers_int = {}
-
 for k, v in numbers.items():
     k, v = v, k
     numbers_int[k] = v
 
 
 def words_to_list():
-    # Преобразовываем из строки в список с математическими элементами
+    """
+    Преобразует ввод пользователя (словами) в список математических элементов.
+    Например: 'два плюс три' → [2, '+', 3]
+    """
     vur = input("Введите выражение: ")
-    vur = vur.lower()
+    vur = vur.lower()  # Приводим всё к нижнему регистру
     global start_str
-    start_str = vur
+    start_str = vur  # Сохраняем оригинальную строку для вывода результата
+
+    # Заменяем фразы на технические обозначения
     vur = vur.replace("скобка открывается", "left")
     vur = vur.replace("скобка закрывается", "right")
     vur = vur.replace("умножить на", "умножить")
-    vur = vur.split()
+
+    vur = vur.split()  # Разбиваем строку на слова
+
     l = []
+    # Переводим слова в числа, операции и скобки
     for i in vur:
         if i in numbers:
             l.append(numbers[i])
@@ -81,7 +91,7 @@ def words_to_list():
             print("Ошибка: неверный ввод - неизвестные слова.")
             exit()
 
-    # Делаем список, где хранится каждый элемент примера
+    # Формируем итоговый список элементов выражения
     sec = []
     for i in range(len(l)):
         if str(l[i]) in "()*-+":
@@ -89,7 +99,7 @@ def words_to_list():
         else:
             ind = i
             chi = l[i]
-            for j in l[ind + 1 :]:
+            for j in l[ind + 1:]:
                 if str(j) not in "()+*-":
                     chi += j
                 elif len(sec) > 0 and str(sec[-1]) not in "+-*()":
@@ -103,22 +113,37 @@ def words_to_list():
 
 
 def var_check(expression: list):
+    """
+    Проверяет корректность математического выражения:
+    - сбалансированные скобки
+    - правильное расположение операторов
+    - отсутствие пустых скобок
+    - нет подряд идущих операторов
+    """
     check = ""
     for i in expression:
         check += str(i)
+
+    # Проверка количества скобок
     if check.count("(") != check.count(")"):
         print("Ошибка: несоответствие количества открывающих и закрывающих скобок.")
         exit()
+
+    # Проверка, что выражение не начинается и не заканчивается оператором
     if expression[0] in does.values():
         print("Ошибка: оператор не может быть первым.")
         exit()
     if expression[-1] in does.values():
         print("Ошибка: оператор не может быть последним.")
         exit()
+
+    # Проверка на пустые скобки
     for i in range(len(expression) - 1):
         if expression[i] == "(" and expression[i + 1] == ")":
             print("Ошибка: пустые скобки ()")
             exit()
+
+    # Проверка на некорректные комбинации операторов
     if (
         "**" in check
         or "++" in check
@@ -135,6 +160,10 @@ def var_check(expression: list):
 
 
 def to_rpn(tokens):
+    """
+    Преобразует список токенов в обратную польскую запись (RPN, Reverse Polish Notation)
+    с помощью алгоритма сортировочной станции (Dijkstra).
+    """
     ops_priority = {"+": 1, "-": 1, "*": 2}
     output = []
     stack = []
@@ -143,6 +172,7 @@ def to_rpn(tokens):
         if isinstance(t, (int)):
             output.append(t)
         elif t in ops_priority:
+            # Выгружаем из стека все операции с приоритетом не ниже текущей
             while (
                 stack
                 and stack[-1] in ops_priority
@@ -155,13 +185,16 @@ def to_rpn(tokens):
         elif t == ")":
             while stack and stack[-1] != "(":
                 output.append(stack.pop())
-            stack.pop()  # убираем '('
+            stack.pop()  # Убираем открывающую скобку
     while stack:
         output.append(stack.pop())
     return output
 
 
 def eval_rpn(rpn):
+    """
+    Вычисляет результат выражения, записанного в обратной польской нотации.
+    """
     stack = []
     for token in rpn:
         if isinstance(token, (int)):
@@ -179,6 +212,10 @@ def eval_rpn(rpn):
 
 
 def convert(sum):
+    """
+    Переводит числовой результат обратно в слова (на русском).
+    Например: 45 → 'сорок пять'
+    """
     if sum % 100 < 20 and sum < 100:
         otv = numbers_int[sum]
     elif sum % 100 < 20 and sum > 100:
@@ -203,9 +240,12 @@ def convert(sum):
         otv = otv[:-1]
         if sum == "0":
             otv = "ноль"
+
+    # Выводим исходное выражение и его результат словами
     print(start_str + " = " + otv, sep=" ")
 
 
-kon = words_to_list()
-var_check(kon)
-convert(eval_rpn(to_rpn(kon)))
+# Основной блок программы
+kon = words_to_list()               # Преобразуем слова в список токенов
+var_check(kon)                     # Проверяем корректность выражения
+convert(eval_rpn(to_rpn(kon)))     # Переводим в ОПЗ, считаем и выводим результат словами

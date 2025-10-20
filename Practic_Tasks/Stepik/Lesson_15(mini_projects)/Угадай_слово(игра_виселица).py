@@ -133,4 +133,9 @@ def progress_of_the_game(step, word_list, use_letters):
 step = 0  # Счётчик ошибок
 while step < 6:  # Пока не допущено 6 ошибок
     step = progress_of_the_game(step, word_list, use_letters)  # Один ход игрока
+    if "▯" not in mask:
+        print("Поздравляю, ты выиграл!")
+        break
+    
+
 generate_gallows(step)  # В конце показываем финальное состояние виселицы
