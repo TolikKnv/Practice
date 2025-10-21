@@ -1,4 +1,4 @@
-# import random
+from random import *
 
 # n=5
 # m=6
@@ -36,11 +36,10 @@
 # print()
 
 
-
 # number 3
-'''
+"""
 Транспонирование матрицы
-'''
+"""
 # transposed_matrix=[]
 # for i in range(len(matrix[0])):
 #     j1=[]
@@ -59,8 +58,7 @@
 # print(*del_matrix,sep='\n')
 
 
-
-#number 5
+# number 5
 # l=[0]*(m+1)
 # col1 = int(input('Введите номер столбца: '))
 # str1 = int(input('Введите номер строки: '))
@@ -69,7 +67,7 @@
 # extended_matrix.insert(str1-1,l)
 # print(*extended_matrix,sep='\n')
 
-# Умножение
+# Умножение матриц
 # def tr(a, n, m):
 #     s = [[0 for _ in range(n)] for _ in range(m)]
 #     for i in range(n):
@@ -100,3 +98,55 @@
 #             t += s[i][x]*s2[j][x]
 #         ans[i][j] = t
 # print(*ans, sep='\n')
+
+
+# №1 со страницы 50
+
+# tuple = set()
+# for i in range(10):
+#     tuple.add(randint(1, 100))
+# print(tuple)
+# d = []
+# for i in range(len(tuple)):
+#     d.append(i)
+# print(dict(zip(d, tuple)))
+
+
+# №2 со страницы 50
+# mixed_tuple = ("Alice", 25, 3.14, True, [1, 2, 3], {"city": "London"})
+# print(mixed_tuple)
+
+# people = [("Alice", 25), ("Bob", 30), ("Charlie", 22)]
+# names, ages = zip(*people)
+# names = list(names)
+# ages = list(ages)
+
+# print(names)
+# print(ages)`
+
+
+# №3 со страницы 50
+
+# tuple = {1,2,3,4,5,6,7,8,9,10}
+# print(next(iter(tuple)))
+# l_tuple = list(tuple)
+# print(l_tuple[::-1])
+
+
+
+
+# №4 со страницы 50
+
+# tuple = (1,2,3)
+# num1,num2,num3 = tuple
+# print(num1,num2,num3)
+# d_tuple = (('name','Bob'),('age',12),('city','New York'))
+# dict_tuple = dict(d_tuple)
+# print(dict_tuple)
+
+
+# №5 со страницы 50
+
+# tuple = (100,200)
+# tuple = tuple + (300,)
+# print(f'это кортеж {tuple}')
