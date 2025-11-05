@@ -165,11 +165,44 @@
 
 
 #25
-letter = input()
-dict_ = {'1': '1', '2': '11', '10': '111', '4': '1111', '5': '11111'}
-dict_1 = dict_.copy()
-for k in dict_.keys():
-    if k[0]==letter:
-        del dict_1[k]
+# letter = input()
+# dict_ = {'1': '1', '2': '11', '10': '111', '4': '1111', '5': '11111'}
+# dict_1 = dict_.copy()
+# for k in dict_.keys():
+#     if k[0]==letter:
+#         del dict_1[k]
 
-print(dict_1)
+# print(dict_1)
+
+
+#1
+# q = [(1,'2'),(2,'2')]
+# d = {}
+# d.update(q)
+# print(d)
+
+#1
+import random
+# A = set()
+# B = set()
+# while len(A)<10:
+#     A.add(random.randint(1,10))
+# while len(B)<5:
+#     B.add(random.randint(1,10))
+# print(A,B)
+# print(A|B)
+# print(A&B)
+# print(A-B)
+# print(A^B)
+# print(A.issubset(B))
+# print(B.issubset(A))
+
+
+#2
+# t1 = set(['Иванов','Петров','Сидоров','Хохлов','Гуров'])
+# t2 = set(['Иванов','Антипов','Горохов','Хохлов','Гуров'])
+# t3 = set(['Фокина','Антипов','Шкель','Хохлов','Шаронов'])
+# print(t1|t2|t3, 'Решил хотя бф 1 задачу')
+# print(t1&t2&t3, 'Решил все задачи')
+# print((t1|t2|t3)-(t1&t2&t3)-(t1&t2)-(t1&t3)-(t2&t3), 'ровно 1 задачу')
+# print((t1|t2|t3)-(t1&t2&t3)-(t1&t2)-(t1-(t1&t3))-(t2-(t2&t3))-(t2-(t2&t1)), 'ровно 2 задачу')
