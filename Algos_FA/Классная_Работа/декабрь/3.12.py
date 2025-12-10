@@ -127,7 +127,7 @@ import math
 # print(safe_set_union({2:34}, 'asdfg') )
 
 
-#3
+# 3
 # def get_nested_value(data: dict, keys: list):
 #     try:
 #         assert keys != [], 'Список пуст'
@@ -145,7 +145,7 @@ import math
 # print(get_nested_value(data, ["user", "profile", "name",'q']))
 
 
-#4
+# 4
 # def validate_email_set(emails: set):
 #     try:
 #         if all([isinstance(i,str) for i in emails]) and all(['@' in i for i in emails]):
@@ -159,9 +159,31 @@ import math
 # print(validate_email_set(a))
 
 
-#5
-def merge_dicts_safe(dict1: dict, dict2: dict):
-    try:
-        assert isinstance(dict1, dict), 'словарь 1 не словарь'
-        assert isinstance(dict2, dict), 'словарь 1 не словарь'
+# 5
+# def merge_dicts_safe(dict1: dict, dict2: dict):
+#     try:
+#         assert isinstance(dict1, dict), "словарь 1 не словарь"
+#         assert isinstance(dict2, dict), "словарь 1 не словарь"
+#         for i in dict1.keys():
+#             for j in dict2.keys():
+#                 if j == i:
+#                     raise KeyError
+#         for k, v in dict2.items():
+#             dict1.update({k: v})
+#         print(dict1)
+#     except KeyError:
+#         a = []
+#         for i in dict1.keys():
+#             for j in dict2.keys():
+#                 if j == i:
+#                     a.append(j)
+#         print(f"Ключи {a} совподают")
+#     except AssertionError as err:
+#         print(err)
+
+
+# merge_dicts_safe({"a": 1}, {"b": 2})
+# merge_dicts_safe({"a": 1}, 6)
+
+
 
