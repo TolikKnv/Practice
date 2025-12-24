@@ -1,14 +1,21 @@
 import csv
+
+
 def func(name1, name2):
-    with open(name1, 'r', encoding='utf-8') as f:
-        rez1 = f.read()
-    rez = rez1.split()
+    with open(name1, encoding="utf-8") as f:
+        rez = f.read().split()
     print(rez)
-    with open(name2, 'r', encoding='IBM866') as f1:
-        file = csv.reader(f1, delimiter=';')
+    a = []
+    with open(name2, encoding="windows-1251") as f1:
+        file = csv.reader(f1, delimiter=";")
         for i in file:
-            print(i)
+            a.append(i)
+    print(a)
+    name3 = name1[:-4] + "_" + name1[-4:]
+    with open(name3, "w", encoding="UTF-8") as f2:
+        for i in a:
+            if i[0].strip() in rez:
+                f2.write(i[1] + " ")
 
 
-
-func(r'C:\Users\Honor\Desktop\Работа с файлами\10.12.txt',r'C:\Users\Honor\Desktop\Работа с файлами\10.12.csv')
+func(r"C:\Users\Honor\Downloads\123.txt", r"C:\Users\Honor\Downloads\123.csv")
