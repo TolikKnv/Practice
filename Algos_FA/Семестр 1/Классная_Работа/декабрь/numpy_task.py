@@ -1,5 +1,5 @@
 import numpy as np
-R = np.random.randint(0, 12, (3, 4))
+R = np.random.randint(0, 12, (3, 3))
 print(R)
 s = 0
 try:
