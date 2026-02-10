@@ -95,11 +95,14 @@ class School:
         self.age = a
     def pr_av_bal(self):
         return self.av_bal
+    def __repr__(self):
+        return f':) {self.name, self.age, self.clas, self.av_bal}'
     def __str__(self):
         return f'{self.name, self.age, self.clas, self.av_bal}'
 
-
 q = School('qwe', 15, 9, 4.67)
-q.change_av()
-q.pr_av_bal()
+# q.change_av()
+# q.pr_av_bal()
 print(q)
+# print(q.__repr__())
+
