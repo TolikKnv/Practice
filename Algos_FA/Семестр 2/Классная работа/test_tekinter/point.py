@@ -2,8 +2,8 @@ import tkinter as tk
 
 root = tk.Tk()
 
-WIDTH = 600
-HEIGHT = 600
+WIDTH = 400
+HEIGHT = 400
 
 c = tk.Canvas(root, width=WIDTH, height=HEIGHT, bg="white")
 c.pack()
@@ -16,24 +16,6 @@ c.create_line(0, cy, WIDTH, cy, width=2)
 
 # ось Y
 c.create_line(cx, 0, cx, HEIGHT, width=2)
-
-# def to_canvas(x, y):
-#     canvas_x = cx + x
-#     canvas_y = cy - y
-#     return canvas_x, canvas_y
-
-# def draw_point(x, y, r=3, color="red"):
-#     px, py = to_canvas(x, y)
-
-#     c.create_oval(
-#         px-r, py-r,
-#         px+r, py+r,
-#         fill=color,
-#         outline=color
-#     )
-
-# draw_point(2, 2)
-# draw_point(-120, 80)
 
 
 class Figure():
