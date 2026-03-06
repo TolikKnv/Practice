@@ -13,9 +13,11 @@ class Car:
             return False
 
     def __str__(self):
-        if len(self.__dict__) == 5:
+        try:
+            self.__dict__.get('_Car__tip_topliva')
             return f"марка{self.marka} модель {self.model} год {self.god} пробег {self.probeg} тип топлива {self.__tip_topliva}"
-        else:
+        except AttributeError:
+            print('qwrtygfdseghgfdfghdf')
             return f"марка{self.marka} модель {self.model} год {self.god} пробег {self.probeg} тип топлива: NO"
 
     @property
