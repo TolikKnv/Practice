@@ -1,21 +1,21 @@
-# from functools import cache
+from functools import cache
 
 import time
 
 start = time.perf_counter()
 
-def cache(func):
-    storage = {}
+# def cache(func):
+#     storage = {}
 
-    def wrapper(*args):
-        if args in storage:
-            return storage[args]
+#     def wrapper(*args):
+#         if args in storage:
+#             return storage[args]
 
-        result = func(*args)
-        storage[args] = result
-        return result
+#         result = func(*args)
+#         storage[args] = result
+#         return result
 
-    return wrapper
+#     return wrapper
 
 
 @cache
